@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Go Viewer</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "tslib": "./node_modules/tslib/tslib.es6.js",
+          "@joist/di": "./node_modules/@joist/di/target/lib.js",
+          "@joist/element": "./node_modules/@joist/element/target/lib.js"
+        }
+      }
+    </script>
+
+    <script src="./target/register.js" type="module"></script>
+  </head>
+
+  <body>
+    <style>
+      body {
+        margin: 0.5rem;
+      }
+
+      go-board {
+        max-height: calc(100vh - 1rem);
+        background-image: url(assets/textures/kaya.jpg);
+      }
+    </style>
+
+    <form action="/save-game">
+      <go-board name="board" sfx="/assets/sfx"></go-board>
+    </form>
+  </body>
+</html>

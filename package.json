@@ -1,0 +1,111 @@
+{
+  "name": "go-board",
+  "version": "2.3.2",
+  "private": false,
+  "description": "Go board",
+  "type": "module",
+  "main": "./target/libs.js",
+  "module": "./target/libs.js",
+  "exports": {
+    "./*": {
+      "import": "./target/*"
+    }
+  },
+  "files": [
+    "target",
+    "bundle",
+    "assets"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deebloo/go-board.git"
+  },
+  "keywords": [],
+  "author": "deebloo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deebloo/go-board/issues"
+  },
+  "scripts": {
+    "start": "wireit",
+    "build": "wireit",
+    "test": "wireit"
+  },
+  "wireit": {
+    "start": {
+      "command": "browser-sync start --server --files \"target/*.js\" \"*.html\"",
+      "service": true,
+      "dependencies": [
+        {
+          "script": "tsc",
+          "cascade": false
+        }
+      ]
+    },
+    "build": {
+      "dependencies": [
+        "tsc",
+        "rollup"
+      ]
+    },
+    "tsc": {
+      "command": "tsc --build --pretty",
+      "clean": "if-file-deleted",
+      "files": [
+        "src/**",
+        "tsconfig.json"
+      ],
+      "output": [
+        "target/**",
+        "tsconfig.tsbuildinfo"
+      ]
+    },
+    "rollup": {
+      "command": "rollup -c rollup.config.js",
+      "files": [
+        "target/**",
+        "rollup.config.js"
+      ],
+      "output": [
+        "bundle/**"
+      ],
+      "dependencies": [
+        {
+          "script": "tsc",
+          "cascade": false
+        }
+      ]
+    },
+    "test": {
+      "command": "wtr \"target/**/**.spec.js\" --node-resolve --puppeteer",
+      "files": [
+        "target/**"
+      ],
+      "dependencies": [
+        {
+          "script": "tsc",
+          "cascade": false
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "@joist/di": "^3.1.0",
+    "@joist/element": "^3.1.0",
+    "tslib": "^2.5.2"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "^3.1.2",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@web/test-runner": "^0.15.1",
+    "@web/test-runner-puppeteer": "^0.11.0",
+    "browser-sync": "^2.29.3",
+    "firebase-tools": "^11.7.0",
+    "minify-html-literals": "^1.3.5",
+    "prettier": "^2.8.4",
+    "rollup": "^3.20.0",
+    "typescript": "^5.2.2",
+    "wireit": "^0.9.5"
+  }
+}
