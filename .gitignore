@@ -1,0 +1,11 @@
+/node_modules
+/bundle
+/dist
+/target
+/src/**/*.js
+/src/**/*.d.ts
+/website/dist
+.firebase
+.wireit
+*.tsbuildinfo
+firebase-debug.log
